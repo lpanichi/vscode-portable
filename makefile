@@ -25,6 +25,9 @@ run:
 
 install-extensions:
     Portable-VSCode-linux-x64/bin/code $(shell grep -E -v '^\s*($|#)' extensions.txt | sed 's|^|--install-extension |g' | tr '\n' ' ')
+    # grep -E -v '^\s*($|#)' extensions.txt skips blank lines and comment lines.
+    # sed 's|^|--install-extension |g' adds the install flag.
+    # tr '\n' ' ' joins them into one command line.
 
 manifest:
 	echo "# Portable VSCode" > manifest.md
