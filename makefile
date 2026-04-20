@@ -24,7 +24,7 @@ run:
 	Portable-VSCode-linux-x64/bin/code
 
 install-extensions:
-	Portable-VSCode-linux-x64/bin/code `cat extensions.txt | sed 's|^|--install-extension |g' | tr '\n' ' '`
+    Portable-VSCode-linux-x64/bin/code $(shell grep -E -v '^\s*($|#)' extensions.txt | sed 's|^|--install-extension |g' | tr '\n' ' ')
 
 manifest:
 	echo "# Portable VSCode" > manifest.md
