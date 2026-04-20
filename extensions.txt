@@ -9,6 +9,8 @@ evilz.vscode-reveal
 grapecity.gc-excelviewer
 hall.draw
 pomdtr.excalidraw-editor
+tyriar.luna-paint
+arthurlobo.easy-codesnap
 
 # Angular/Vue
 Angular.ng-template
@@ -40,7 +42,7 @@ eamodio.gitlens
 gitlab.gitlab-workflow
 mhutchie.git-graph
 
-#C/CPP
+# C/CPP
 jacqueslucke.gcov-viewer
 ms-vscode.cpptools
 ms-vscode.cpp-devtools
@@ -62,6 +64,7 @@ vadimcn.vscode-lldb
 # Generic
 esbenp.prettier-vscode
 jjjermiah.pixi-vscode
+ibm.output-colorizer
 
 # Docker
 ms-azuretools.vscode-docker
