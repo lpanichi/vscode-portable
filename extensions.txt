@@ -61,6 +61,7 @@ vadimcn.vscode-lldb
 
 # Generic
 esbenp.prettier-vscode
+jjjermiah.pixi-vscode
 
 # Docker
 ms-azuretools.vscode-docker
