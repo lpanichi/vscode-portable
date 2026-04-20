@@ -1,65 +1,74 @@
+# DB
 alexcvzz.vscode-sqlite
+
+# Resources
 analytic-signal.preview-mp4
+jock.svg
+tomoki1207.pdf
+evilz.vscode-reveal
+grapecity.gc-excelviewer
+hall.draw
+pomdtr.excalidraw-editor
+
+# Angular/Vue
 Angular.ng-template
+dbaeumer.vscode-eslint
+vue.volar
+bradlc.vscode-tailwindcss
+
+# AsciiDoctor/Doxygen
 asciidoctor.asciidoctor-vscode
 bbenoist.Doxygen
+cschlosser.doxdocgen
+
+# Markdown
 bierner.markdown-mermaid
+yzhang.markdown-all-in-one
+
+# Python
 charliermarsh.ruff
-dbaeumer.vscode-eslint
-eamodio.gitlens
-esbenp.prettier-vscode
-evilz.vscode-reveal
-franneck94.c-cpp-runner
-fwcd.kotlin
-gitlab.gitlab-workflow
-GrapeCity.gc-excelviewer
-hbenl.vscode-test-explorer
-hediet.vscode-drawio
-janisdd.vscode-edit-csv
-jinxdash.prettier-rust
-jock.svg
-johnpapa.Angular2
-matepek.vscode-catch2-test-adapter
-mechatroner.rainbow-csv
-mhutchie.git-graph
-ms-azuretools.vscode-docker
-ms-python.debugpy
-ms-python.python
 ms-python.vscode-pylance
-ms-toolsai.jupyter
+ms-python.debugpy
+njpwerner.autodocstring
 ms-toolsai.jupyter-keymap
 ms-toolsai.jupyter-renderers
+ms-toolsai.vscode-jupyter-slideshow
 ms-toolsai.vscode-jupyter-cell-tags
-ms-vscode.cmake-tools
+
+# Git / CI
+eamodio.gitlens
+gitlab.gitlab-workflow
+mhutchie.git-graph
+
+#C/CPP
+jacqueslucke.gcov-viewer
 ms-vscode.cpptools
-ms-vscode.cpptools-extension-pack
-ms-vscode.cpptools-themes
+ms-vscode.cpp-devtools
+ms-vscode.cmake-tools
+matepek.vscode-catch2-test-adapter
+twxs.cmake
+ms-vscode.cmake-tools
+fredericbonnet.cmake-test-adapter
 ms-vscode.makefile-tools
-ms-vscode-remote.remote-ssh
-ms-vscode-remote.vscode-remote-extensionpack
-mtxr.sqltools
-naco-siren.gradle-language
-njpwerner.autodocstring	
-njpwerner.autodocstring
+
+# Rust
+jinxdash.prettier-rust
+tamasfe.even-better-toml
+dustypomerleau.rust-syntax
+rust-lang.rust-analyzer
+swellaby.vscode-rust-test-adapter
+vadimcn.vscode-lldb
+
+# Generic
+esbenp.prettier-vscode
+
+# Docker
+ms-azuretools.vscode-docker
+
+# Java
 redhat.java
 redhat.vscode-xml
-richardwillis.vscode-gradle-extension-pack
-rust-lang.rust-analyzer
-samubarb.vscode-doxyfile
-serayuzgur.crates
-Swellaby.rust-pack
-Swellaby.vscode-rust-test-adapter
-tamasfe.even-better-toml
-tomoki1207.pdf
-twxs.cmake
-vadimcn.vscode-lldb
-VisualStudioExptTeam.intellicode-api-usage-examples
-VisualStudioExptTeam.vscodeintellicode
-vscjava.vscode-gradle
 vscjava.vscode-java-debug
-vscjava.vscode-java-dependency
-vscjava.vscode-java-pack
-vscjava.vscode-java-test
 vscjava.vscode-maven
-Vue.volar
-yzhang.markdown-all-in-one
+vscjava.vscode-java-test
+vscjava.vscode-java-dependency
