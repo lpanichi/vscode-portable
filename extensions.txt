@@ -11,11 +11,12 @@ esbenp.prettier-vscode
 evilz.vscode-reveal
 franneck94.c-cpp-runner
 fwcd.kotlin
+gitlab.gitlab-workflow
 GrapeCity.gc-excelviewer
-gruntfuggly.todo-tree
 hbenl.vscode-test-explorer
 hediet.vscode-drawio
 janisdd.vscode-edit-csv
+jinxdash.prettier-rust
 jock.svg
 johnpapa.Angular2
 matepek.vscode-catch2-test-adapter
@@ -51,6 +52,7 @@ Swellaby.vscode-rust-test-adapter
 tamasfe.even-better-toml
 tomoki1207.pdf
 twxs.cmake
+vadimcn.vscode-lldb
 VisualStudioExptTeam.intellicode-api-usage-examples
 VisualStudioExptTeam.vscodeintellicode
 vscjava.vscode-gradle
