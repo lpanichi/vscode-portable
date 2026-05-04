@@ -24,8 +24,8 @@ run:
 	Portable-VSCode-linux-x64/bin/code
 
 install-extensions:
-    Portable-VSCode-linux-x64/bin/code $(shell grep -E -v '^\s*($|#)' extensions.txt | sed 's|^|--install-extension |g' | tr '\n' ' ')
-    # grep -E -v '^\s*($|#)' extensions.txt skips blank lines and comment lines.
+	Portable-VSCode-linux-x64/bin/code `cat extensions.txt | grep -v '^#' | sed 's|^|--install-extension |g' | tr '\n' ' '`
+    # grep -v '^#' skips comment lines.
     # sed 's|^|--install-extension |g' adds the install flag.
     # tr '\n' ' ' joins them into one command line.
 
