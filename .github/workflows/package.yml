@@ -1,19 +1,84 @@
 name: Package
-run-name: Packaging of ${{  github.ref_name }} 📦
+run-name: Packaging of ${{ github.ref_name }} 📦
 on: [push]
 jobs:
   Prepare-Package:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write  # Required to create GitHub Releases
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
-      - name: Build package
+      # Downloads the latest stable VS Code tarball, unpacks it into
+      # Portable-VSCode-linux-x64/, installs all extensions listed in
+      # extensions.txt, and generates manifest.md.
+      # Packaging into a zip is intentionally deferred until after the
+      # VS Code warm-up step below.
+      - name: Build portable package without archive
         run: |
-          cd ${{ github.workspace }} && make
+          cd ${{ github.workspace }}
+          make all_but_package
 
+      # xvfb provides a virtual framebuffer so VS Code can start in the
+      # headless GitHub Actions runner environment (no real display server).
+      - name: Install system dependencies for VS Code
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+
+      # Some extensions defer downloading platform-specific runtime binaries
+      # until VS Code first activates them (e.g. ms-vscode.cpptools, CodeLLDB).
+      # We start VS Code once, give it 60 seconds to complete those downloads,
+      # then shut it down so those assets are included in the final archive.
+      #
+      # --user-data-dir  points to a throw-away directory so we don't pollute
+      #                  the portable data folder with ephemeral user state.
+      # --extensions-dir points to the portable extensions folder populated by
+      #                  "make install-extensions".
+      - name: Start VS Code to download runtime assets
+        run: |
+          cd ${{ github.workspace }}
+          mkdir -p .vscode-user-data
+          xvfb-run -a --server-args='-screen 0 1280x720x24' bash -c '
+            # Run VS Code in the background so the script can continue to the
+            # sleep and the kill. Without &, the script would hang here forever
+            # and the CI runner would eventually kill it with SIGTERM (exit 143).
+            Portable-VSCode-linux-x64/bin/code \
+              --user-data-dir "$PWD/.vscode-user-data" \
+              --extensions-dir "$PWD/Portable-VSCode-linux-x64/data/user-data/extensions" \
+              --disable-gpu \
+              --no-sandbox \
+              --disable-crash-reporter \
+              --disable-updates \
+              . \
+              > code-activation.log 2>&1 &
+            CODE_PID=$!
+            # Give extensions time to download their runtime assets.
+            sleep 60
+            # Kill by PID, not by name pattern: pkill -f would also match this
+            # bash process (whose argv contains the path) and kill the wrapper.
+            kill "$CODE_PID" 2>/dev/null || true
+            wait "$CODE_PID" 2>/dev/null || true
+          '
+          # Log what was downloaded so warm-up results are visible in CI.
+          echo "--- Runtime assets present after warm-up ---"
+          find Portable-VSCode-linux-x64/data/user-data/extensions \
+            \( -name "*.ok" -o -name "*.bin" -o -name "*.so" \) | sort || true
+          cat code-activation.log || true
+
+      # Seal the final archive. --filesync ensures the zip exactly mirrors the
+      # directory (removes stale entries, adds newly downloaded assets).
+      - name: Recreate portable archive
+        run: |
+          cd ${{ github.workspace }}
+          # Remove Unix socket and FIFO files left behind by VS Code.
+          # zip cannot archive these special file types and exits with
+          # code 18 ("not all files were readable") if any are present.
+          find Portable-VSCode-linux-x64 \( -type s -o -type p \) -delete
+          rm -f Portable-VSCode-linux-x64.zip
+          zip --filesync -r Portable-VSCode-linux-x64.zip Portable-VSCode-linux-x64
+
+      # Publish a GitHub Release with the zip and install script as artifacts.
+      # Only runs when the triggering ref is a version tag (e.g. v1.2.3).
       - name: Create new release for ${{ github.ref }} 🚀
         uses: ncipollo/release-action@v1
         if: startsWith(github.ref, 'refs/tags/')
@@ -22,3 +87,4 @@ jobs:
           bodyFile: "manifest.md"
 
       - run: echo "💡 This job's status is ${{ job.status }}."
+
